@@ -38,7 +38,7 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     // SpigotAPI
-    compileOnly("org.spigotmc:spigot-api:1.13-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:1.21-R0.1-SNAPSHOT")
     // XSeries - XMaterial
     implementation("com.github.cryptomorin:XSeries:11.1.0") { isTransitive = false; exclude("com/cryptomorin/xseries/XMaterial*") }
     // bStats
