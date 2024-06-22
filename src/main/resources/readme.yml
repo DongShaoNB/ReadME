@@ -1,0 +1,30 @@
+title: "<gold>README"
+size: 27
+
+items:
+  readme:
+    material: "PAPER"
+    name: "<gold>README"
+    amount: 1
+    slot: 10
+    lore:
+      - "<red>1. No playing this server"
+  agree:
+    material: "GREEN_WOOL"
+    name: "<green>Agree"
+    amount: 1
+    slot: 14
+    lore:
+      - "<gold>Click to agree"
+    click-action:
+      - "[PLAYER] say OK, I will quit this server"
+      - "[AGREE]"
+  refuse:
+    material: "RED_WOOL"
+    name: "<red>Refuse"
+    amount: 1
+    slot: 16
+    lore:
+      - "<gold>Click to refuse and quit this server"
+    click-action:
+      - "[KICK] <red>You refused us"
