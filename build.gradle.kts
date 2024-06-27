@@ -52,7 +52,7 @@ dependencies {
     // Adventure Platform - Bukkit
     implementation("net.kyori:adventure-platform-bukkit:4.3.3")
     // AuthMe
-    compileOnly("fr.xephi:authme:5.6.0-SNAPSHOT")
+    compileOnly("fr.xephi:authme:5.6.1-SNAPSHOT")
     // PlaceholderAPI
     compileOnly("me.clip:placeholderapi:2.11.6")
 }
