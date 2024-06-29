@@ -40,7 +40,7 @@ dependencies {
     // SpigotAPI
     compileOnly("org.spigotmc:spigot-api:1.13-R0.1-SNAPSHOT")
     // XSeries - XMaterial
-    implementation("com.github.cryptomorin:XSeries:11.1.0")
+    implementation("com.github.cryptomorin:XSeries:11.2.0")
     // bStats
     implementation("org.bstats:bstats-bukkit:3.0.2")
     // DazzleConf
