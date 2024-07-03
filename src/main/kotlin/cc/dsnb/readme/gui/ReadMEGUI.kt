@@ -25,7 +25,7 @@ class ReadMEGUI {
         for (key in guiConfig.getConfigurationSection("items").getKeys(false)) {
             XMaterial.matchXMaterial(guiConfig.getString("items.$key.material").uppercase()).apply {
                 if (isPresent) {
-                    val material = this.get().parseMaterial()!!
+                    val material = this.get().parseMaterial()
                     val loreList = if (guiConfig.getStringList("items.$key.lore").isNullOrEmpty()) {
                         null
                     } else {

@@ -13,6 +13,11 @@ class InventoryListener : Listener {
 
     @EventHandler
     fun onInventoryClick(event: InventoryClickEvent) {
+
+        if (event.clickedInventory == null) {
+            return
+        }
+
         if (ReadME.readmeGUI.equalsInventory(event.clickedInventory)) {
             event.isCancelled = true
             val player = event.whoClicked as Player
@@ -23,15 +28,25 @@ class InventoryListener : Listener {
                     val legacySection = ReadME.serializerLegacy
                     for (action in ReadME.readmeGUI.itemMap[itemStack]!!) {
                         val splitAction = action.split(" ", limit = 2)
+                        val actionContext = if (ReadME.hookPapi && splitAction.size == 2) {
+                            PlaceholderAPI.setPlaceholders(
+                                player,
+                                splitAction[1]
+                            )
+                        } else if (splitAction.size == 2) {
+                            splitAction[1]
+                        } else {
+                            ""
+                        }
                         when (splitAction[0].uppercase()) {
                             "[PLAYER]" -> {
-                                player.performCommand(PlaceholderAPI.setPlaceholders(player, splitAction[1]))
+                                player.performCommand(actionContext)
                             }
 
                             "[CONSOLE]" -> {
                                 ReadME.instance.server.dispatchCommand(
                                     ReadME.instance.server.consoleSender,
-                                    PlaceholderAPI.setPlaceholders(player, splitAction[1])
+                                    actionContext
                                 )
                             }
 
@@ -39,10 +54,7 @@ class InventoryListener : Listener {
                                 player.sendMessage(
                                     legacySection.serialize(
                                         miniMessage.deserialize(
-                                            PlaceholderAPI.setPlaceholders(
-                                                player,
-                                                splitAction[1]
-                                            )
+                                            actionContext
                                         )
                                     )
                                 )
@@ -52,10 +64,7 @@ class InventoryListener : Listener {
                                 player.kickPlayer(
                                     legacySection.serialize(
                                         miniMessage.deserialize(
-                                            PlaceholderAPI.setPlaceholders(
-                                                player,
-                                                splitAction[1]
-                                            )
+                                            actionContext
                                         )
                                     )
                                 )
@@ -75,7 +84,9 @@ class InventoryListener : Listener {
     @EventHandler
     fun onInventoryClose(event: InventoryCloseEvent) {
         if (ReadME.readmeGUI.equalsInventory(event.inventory)) {
-            ReadME.readmeGUI.open(event.player as Player)
+            if (RUser(event.player.uniqueId).getAgree().not()) {
+                ReadME.readmeGUI.open(event.player as Player)
+            }
         }
     }
 

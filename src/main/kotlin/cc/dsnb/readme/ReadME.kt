@@ -36,6 +36,7 @@ class ReadME : JavaPlugin() {
         val miniMessage = MiniMessage.miniMessage()
         val serializerLegacy = BukkitComponentSerializer.legacy()
         val systemLanguage = Locale.getDefault().language
+        var hookPapi = false
     }
 
     override fun onEnable() {
@@ -44,6 +45,7 @@ class ReadME : JavaPlugin() {
         audiences = BukkitAudiences.create(this)
         loadConfig()
         loadFunction()
+        hookPlugin()
         registerCommand()
         registerListener()
         loadMetrics()
@@ -71,6 +73,12 @@ class ReadME : JavaPlugin() {
     private fun loadFunction() {
         readmeGUI = ReadMEGUI().also {
             it.reload()
+        }
+    }
+
+    private fun hookPlugin() {
+        if (server.pluginManager.isPluginEnabled("PlaceholderAPI")) {
+            hookPapi = true
         }
     }
 
